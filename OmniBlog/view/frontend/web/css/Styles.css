@@ -1,0 +1,103 @@
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}  */
+
+body {
+  display: inline !important;
+  place-items: center !important;
+  font-family: "Montserrat", sans-serif !important;
+  height: 25vh !important;
+}
+form {
+  background-color: cadetblue !important;
+  display: flex;
+  text-indent: 50px;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+h3 {
+  text-align-last: left;
+  text-indent: 50px;
+}
+h2 {
+  text-align-last: left;
+  text-indent: 50px;
+}
+h1 {
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 75%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+input[type="email"] {
+  width: 50%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.container {
+  background-color: #ffffff;
+  border: 3px solid black;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: absolute;
+  margin-left: 12.5%;
+  width: 75%;
+  max-width: 100%;
+  min-height: 200px;
+}
+.container_b {
+  background-color: #ffffff;
+  border: 3px solid black;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: absolute;
+  width: 75%;
+  max-width: 100%;
+  min-height: 200px;
+  margin-left: 12.5%;
+  margin-top: 12.5%;
+}
+.container_c {
+  background-color: #ffffff;
+  border: 3px solid black;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: absolute;
+  width: 75%;
+  max-width: 100%;
+  min-height: 200px;
+  margin-left: 12.5%;
+  margin-top: 24%;
+}
+.container_d {
+  background-color: #ffffff;
+  border: 3px solid black;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: absolute;
+  width: 75%;
+  max-width: 100%;
+  min-height: 200px;
+  margin-left: 12.5%;
+  margin-top: 37.5%;
+}
+.btn_save {
+  position: absolute;
+  width: 25%;
+  padding: 7px;
+  margin-top: 10px;
+  margin-left: 70.5%;
+  margin-bottom: 7%;
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 640px) {
+}
