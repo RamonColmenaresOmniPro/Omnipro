@@ -3,7 +3,6 @@
     <head>
         <css src="css/Styles.css" rel="stylesheet" type="text/css" />
     </head>
-    
     <body>
         <referenceContainer name="content">
             <block name="Omnipro_OmniBlog_Posts" template="Omnipro_OmniBlog::posts.phtml">
