@@ -3,9 +3,14 @@
     <head>
         <css src="css/Styles.css" rel="stylesheet" type="text/css" />
     </head>
+    
     <body>
         <referenceContainer name="content">
-        <block name="Omnipro_OmniBlog_front" template="Omnipro_OmniBlog::omniblog.phtml" />
+            <block name="Omnipro_OmniBlog_Posts" template="Omnipro_OmniBlog::posts.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Omnipro\OmniBlog\ViewModel\OmniBlogViewModel</argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>
