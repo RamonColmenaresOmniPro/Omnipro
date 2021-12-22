@@ -2,7 +2,7 @@
 namespace Omnipro\OmniBlog\Api\Data;
 
 interface OmniBlogInterface
-{    
+{
     /**
      * getPostId
      *

@@ -32,8 +32,7 @@ class Index extends \Magento\Framework\App\Action\Action
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \Omnipro\OmniBlog\Model\OmniBlogFactory $omniBlogFactory,
         \Omnipro\OmniBlog\Api\OmniBlogRepositoryInterface $omniBlogRepository
-    )
-    {
+    ) {
         $this->_pageFactory = $pageFactory;
         $this->jsonFactory = $jsonFactory;
         $this->omniBlogFactory = $omniBlogFactory;
@@ -46,7 +45,7 @@ class Index extends \Magento\Framework\App\Action\Action
      * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
-    { 
+    {
         $json = $this->jsonFactory->create();
 
         $omniblog = $this->omniBlogFactory->create();

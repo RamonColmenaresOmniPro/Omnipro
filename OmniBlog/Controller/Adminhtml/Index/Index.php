@@ -32,7 +32,7 @@ class Index extends \Magento\Backend\App\Action
          /** @var \Magento\Framework\View\Result\Page $resultPage */
          $resultPage = $this->_pageFactory->create();
          //$resultPage->setActiveMenu(static::ADMIN_RESOURCE);
-         $resultPage->getConfig()->getTitle()->prepend(__('Posts'));
+         $resultPage->getConfig()->getTitle()->prepend(__('Posts Grid'));
          return $resultPage;
     }
 
