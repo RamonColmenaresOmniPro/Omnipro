@@ -1,11 +1,15 @@
 <?php
 
-/** @var \Omnipro\Blog\Block\Template $block */
+/** @var \Magento\Framework\View\Element $block */
 
-
+$viewModel = $block->getViewModel();
+$items = $viewModel->getPosts();
 ?>
 
-
+<?php foreach ($items as $post): ?>
+<h1><?= $post['title'] ?></h1>
+<div><?= $post['content'] ?></div>
+<?php endforeach; ?>
 
 <head>
 
