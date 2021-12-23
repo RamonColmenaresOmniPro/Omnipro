@@ -14,23 +14,31 @@ $items = $viewModel->getPosts();
     body{
       background-color: rgb(255, 136, 0);
     }
+    main{
+      align-items: center;
+    }
     h1 {
       text-align: center;
       text-shadow: 2px 2px rgb(255, 136, 0);
       font-family: Arial, Helvetica, sans-serif;
+      border-radius: 15px;
+      background-color: #ffff;
     }
     h2 {
       font-family: Arial, Helvetica, sans-serif;
-    }
-    .container-form {
+      border-radius: 15px;
       background-color: #ffff;
-      width: 89vw;
-      height: auto;
-      margin-left: 4vw;
-      margin-right: 4vw;
-      border-radius: 4px;
-      padding-left: 40px;
-      padding-bottom: 10px;
+      padding: 10px;
+      width: auto;
+    }
+    #container-form {
+      background-color: #ffff;
+      width: 70vw;
+      margin: auto;
+      height: 700px;
+      border-radius: 15px;
+      border-style: solid;
+      padding: 40px;
     }
     input[type=text] {
       border: 1px solid black;
@@ -58,18 +66,13 @@ $items = $viewModel->getPosts();
       margin-top: 10px;
       margin-bottom: 10px;
     }
-    .btn_save {
+    #btn_save {
       cursor: pointer;
       border: solid;
       border-radius: 15px;
-      width: 22vw;
-      height: 8vh;
-      margin-bottom: -20;
-      padding-bottom: 1px;
-      margin-bottom: -20;
-      margin-bottom: 0px;
-      margin-top: 0px;
-      margin-top: -15vh;
+      height: 40px;
+      width: 100px;
+      margin-top: 15px;
     }
     .container_less_recent_blog {
       background-color: #ffff;
@@ -85,6 +88,10 @@ $items = $viewModel->getPosts();
     }
     .container-lastest-blog {
       margin-top: 20px;
+    }
+    #title, #email{
+      width: 400px;
+      padding: 5px;
     }
 
   </style>
