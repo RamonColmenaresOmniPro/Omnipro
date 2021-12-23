@@ -2,6 +2,7 @@
 namespace Omnipro\OmniBlog\Controller\Posts;
 
 use  Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Exception\CouldNotSaveException;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -33,6 +34,11 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $adapterFactory;
     protected $filesystem;
 
+    /**
+     * @param \Magento\Framework\Data\Form\FormKey\Validator
+     */
+    private $formKeyValidator;
+
     public function __construct(
         \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory,
         \Magento\Framework\Image\AdapterFactory $adapterFactory,
@@ -41,7 +47,8 @@ class Index extends \Magento\Framework\App\Action\Action
         \Magento\Framework\View\Result\PageFactory $pageFactory,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \Omnipro\OmniBlog\Model\OmniBlogFactory $omniBlogFactory,
-        \Omnipro\OmniBlog\Api\OmniBlogRepositoryInterface $omniBlogRepository
+        \Omnipro\OmniBlog\Api\OmniBlogRepositoryInterface $omniBlogRepository,
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
     )
     {
         $this->uploaderFactory = $uploaderFactory;
@@ -51,6 +58,7 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->jsonFactory = $jsonFactory;
         $this->omniBlogFactory = $omniBlogFactory;
         $this->omniBlogRepository = $omniBlogRepository;
+        $this->formKeyValidator = $formKeyValidator;
         return parent::__construct($context);
     }
     /**
@@ -93,6 +101,8 @@ class Index extends \Magento\Framework\App\Action\Action
         
         $omniblog->setData($data);
 
+        $this->validateFormKey();
+
         $this->omniBlogRepository->save($omniblog);
 
         $json->setData([
@@ -100,5 +110,11 @@ class Index extends \Magento\Framework\App\Action\Action
             'omniblog' => $omniblog->toArray()
         ]);
         return $this->_pageFactory->create();
+    }
+
+    private function validateFormKey(){
+        if (!$this->formKeyValidator->validate($this->getRequest())) {
+            throw new CouldNotSaveException(__("The Form it is Invalid"));
+        }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Omnipro\OmniBlog\Model;
 
+use Magento\AdminGws\Model\Plugin\UserCollection;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -32,12 +33,30 @@ class OmniBlogRepository implements \Omnipro\OmniBlog\Api\OmniBlogRepositoryInte
      */
     private $collectionProcessor;
 
+    /**
+     * @param \Magento\Authorization\Model\UserContextInterface
+     */
+    private $userContext;
+
+    /**
+     * @param \Magento\User\Model\ResourceModel\User\CollectionFactory
+     */
+    private $userCollectionFactory;
+
+    /**
+     * @param \Magento\Framework\Data\Form\FormKey\Validator
+     */
+    private $formKeyValidator;
+
     public function __construct(
         \Omnipro\OmniBlog\Model\OmniBlogFactory $omniBlogFactory,
         \Omnipro\OmniBlog\Model\ResourceModel\OmniBlog $omniBlogResource,
         \Omnipro\OmniBlog\Model\ResourceModel\OmniBlog\CollectionFactory $omniBlogCollectionFactory,
         \Omnipro\OmniBlog\Api\Data\SearchResultsInterfaceFactory $searchResultsInterfaceFactory,
-        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
+        \Magento\Authorization\Model\UserContextInterface $userContext,
+        \Magento\User\Model\ResourceModel\User\CollectionFactory $userCollectionFactory,
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
     )
     {
         $this->omniBlogFactory = $omniBlogFactory;
@@ -45,6 +64,9 @@ class OmniBlogRepository implements \Omnipro\OmniBlog\Api\OmniBlogRepositoryInte
         $this->omniBlogCollectionFactory = $omniBlogCollectionFactory;
         $this->searchResultsInterfaceFactory = $searchResultsInterfaceFactory;
         $this->collectionProcessor = $collectionProcessor;
+        $this->userContext = $userContext;
+        $this->userCollectionFactory = $userCollectionFactory;
+        $this->formKeyValidator = $formKeyValidator;
     }
 
     public function getList($searchCriteria)
@@ -77,7 +99,13 @@ class OmniBlogRepository implements \Omnipro\OmniBlog\Api\OmniBlogRepositoryInte
      * @throws CouldNotSaveException
      */
     public function save($omniBlog)
-    {
+    {   
+        $prueba1 = $this->validateEmail($omniBlog);
+        $prueba2 = sizeof($omniBlog->getData());
+        if (!$prueba1 && $prueba2) {
+            throw new CouldNotSaveException(__("The Email doesn't exists or It's not an administrator role"));
+        }
+
         try {
             $this->omniBlogResource->save($omniBlog);
         } catch (\Exception $e) {
@@ -91,7 +119,7 @@ class OmniBlogRepository implements \Omnipro\OmniBlog\Api\OmniBlogRepositoryInte
      * @throws CouldNotDeleteException
      */
     public function delete($omniBlog)
-    {
+    {   
         try {
             $this->omniBlogResource->delete($omniBlog);
         } catch (\Exception $e) {
@@ -103,4 +131,41 @@ class OmniBlogRepository implements \Omnipro\OmniBlog\Api\OmniBlogRepositoryInte
     {
         return $this->delete($this->getById($id));
     }
+
+    /**
+     * @param OmniBlog $omniBlog
+     * @return bool
+     */
+    private function validateEmail($omniBlog)
+    {
+        $validate = false;
+        $adminEmails = $this->getUsersData();
+        $postEmail = $omniBlog->getEmail();
+        foreach ($adminEmails as $email['email']) {
+            if ($postEmail == $email['email']) {
+                $validate = true;
+            }
+        }
+
+        return $validate;
+    }
+    
+    /**
+     * getUsersData
+     *
+     * @return void
+     */
+    private function getUsersData()
+    {
+        $collection = $this->userCollectionFactory->create();
+        $userData = $collection->getItems();
+        $userArray = [];
+        foreach ($userData as $user) {
+            if ($user->getData()["role_name"] == "Administrators") {
+                $userArray['email']=$user->getData()["email"];
+            }
+        }
+        return $userArray;
+    }
+
 }
