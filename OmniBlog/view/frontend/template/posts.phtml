@@ -9,7 +9,7 @@ $items = $viewModel->getPosts();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="stylesheet" href="../css/Styles.css">
+    <link rel="stylesheet" href="css/Styles.css">
   </head>
   <body>
     <h1 class="main_title">MY SPECTACULAR BLOG</h1>
@@ -18,30 +18,37 @@ $items = $viewModel->getPosts();
         <div class="container-form" id="container">
             <form method="POST">
                 <input type="text" name="title" placeholder="Titulo" />
-                <br><br>
-                <textarea name="content" cols="30" rows="15"></textarea>
                 <br>
+
                 <input type="email" name="email" placeholder="Email" />
                 <br>
-                <input type="file" name="image" placeholder="Imagen" />
+
+                <input class="image-file" type="file" name="image" placeholder="Imagen" />
                 <br><br>
+
+                <textarea class="text-area-content" name="content" cols="105" rows="45"></textarea>
+                <br>
+
                 <button class="btn_save">Guardar</button>
             </form>
         </div>
-          <div class= "container_b">
+    
+        <div class= "container-lastest-blog">
             <h1>My lastest post blog</h1> 
             <h3>Aqui va el texto y mas adelante la fecha</h3>
-          </div>
-          <div class= "container_c">
-              <h2>My less recent blog</h2> 
-              <h3>Aqui va el texto </h3>
-              <img src="">
-            </div>
-            <div class= "container_d">
-                <h2>Today in old news</h2> 
-                <h3>Aqui va el texto y atras una imagen</h3>
-            </div>
+        </div>
+
+        <div class= "container_less_recent_blog">
+            <h2>My less recent blog</h2> 
+            <h3>Aqui va el texto </h3>
+            <img src="">
+        </div>
+        <div class= "container_old_blog">
+            <h2>Today in old news</h2> 
+            <h3>Aqui va el texto y atras una imagen</h3>
+        </div>
     </main>
+
         <script>
           function store(){
             let inputEmail= document.getElementById("email");
