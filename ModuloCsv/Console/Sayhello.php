@@ -12,11 +12,18 @@ class Sayhello extends Command
      */
     private $csv;
 
+    /**
+     * @param \Omnipro\ModuloCsv\Helper\Email
+     */
+    private $helperEmail;
+
     public function __construct(
-        \Omnipro\ModuloCsv\Helper\Csv $csv
+        \Omnipro\ModuloCsv\Helper\Csv $csv,
+        \Omnipro\ModuloCsv\Helper\Email $helperEmail
     )
     {
         $this->csv = $csv;
+        $this->helperEmail = $helperEmail;
         parent::__construct();
     }
     protected function configure()
@@ -30,6 +37,7 @@ class Sayhello extends Command
     {
         $prueba1 = $this->csv;
         $prueba2 = $prueba1->readCsv();
-        $output->writeln("Lectura exitosa de Csv");
+        $this->helperEmail->sendEmail();
+        // $output->writeln($prueba2);
     }
 }
