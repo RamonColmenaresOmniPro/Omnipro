@@ -1,3 +1,4 @@
+<<<<<<< HEAD:OmniBlog/etc/frontend/routes.xml
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
@@ -5,4 +6,13 @@
             <module name="Omnipro_OmniBlog" />
         </route>
     </router>
+=======
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="rickandmorty" frontName="rickandmorty">
+            <module name="Omnipro_RickAndMorty" />
+        </route>
+    </router>
+>>>>>>> master:RickAndMorty/etc/frontend/routes.xml
 </config>
