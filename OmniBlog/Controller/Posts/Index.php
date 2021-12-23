@@ -3,6 +3,7 @@ namespace Omnipro\OmniBlog\Controller\Posts;
 
 use  Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
