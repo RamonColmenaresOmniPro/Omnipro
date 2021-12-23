@@ -101,7 +101,7 @@ class Index extends \Magento\Framework\App\Action\Action
         
         $omniblog->setData($data);
 
-        $this->validateFormKey();
+        $this->validateFormKey($omniblog);
 
         $this->omniBlogRepository->save($omniblog);
 
@@ -112,8 +112,18 @@ class Index extends \Magento\Framework\App\Action\Action
         return $this->_pageFactory->create();
     }
 
+    /**
+     * @param OmniBlog $omniBlog
+     */
     private function validateFormKey(){
-        if (!$this->formKeyValidator->validate($this->getRequest())) {
+        $omniblog = $this->omniBlogFactory->create();
+
+        $data =$this->getRequest()->getParams();
+        
+        $omniblog->setData($data);
+
+        $validate = sizeof($omniblog->getData());
+        if (!$this->formKeyValidator->validate($this->getRequest()) && $validate) {
             throw new CouldNotSaveException(__("The Form it is Invalid"));
         }
     }

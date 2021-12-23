@@ -10,6 +10,9 @@
                     <argument name="view_model" xsi:type="object">Omnipro\OmniBlog\ViewModel\OmniBlogViewModel</argument>
                 </arguments>
             </block>
+            <referenceContainer name="header.container" remove="true" />
+            <referenceContainer name="footer" remove="true" /> 
+            <referenceBlock name="navigation.sections" remove="true" />
         </referenceContainer>
     </body>
 </page>

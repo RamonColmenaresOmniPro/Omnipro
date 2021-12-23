@@ -1,11 +1,8 @@
 <?php
-
 /** @var \Magento\Framework\View\Element $block */
-
 $viewModel = $block->getViewModel();
 $items = $viewModel->getPosts();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -14,97 +11,83 @@ $items = $viewModel->getPosts();
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="stylesheet" href="css/Styles.css">
     <style>
-      /* * {
+    body{
+      background-color: rgb(255, 136, 0);
+    }
+    h1 {
+      text-align: center;
+      text-shadow: 2px 2px rgb(255, 136, 0);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .container-form {
+      background-color: #ffff;
+      width: 89vw;
+      height: auto;
+      margin-left: 4vw;
+      margin-right: 4vw;
+      border-radius: 4px;
+      padding-left: 40px;
+      padding-bottom: 10px;
+    }
+    input[type=text] {
+      border: 1px solid black;
+      border-radius: 4px;
+      width: 40%;
+      padding: 3px 5px;
+      margin: 8px 0;
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      }  */
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .text-area-content {
+      border: 1px solid black;
+      border-radius: 8px;
+      width: 100%;
+      height: 57.1vh;
+      font-size: 15px;
+      border-style: solid;
+      border-color: black;
+    }
+    input[type=email] {
+      border: 1px solid black;
+      border-radius: 4px;
+      width: 50%;
+      padding-top: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .btn_save {
+      cursor: pointer;
+      border: solid;
+      border-radius: 15px;
+      width: 22vw;
+      height: 8vh;
+      margin-bottom: -20;
+      padding-bottom: 1px;
+      margin-bottom: -20;
+      margin-bottom: 0px;
+      margin-top: 0px;
+      margin-top: -15vh;
+    }
+    .container_less_recent_blog {
+      background-color: #ffff;
+      width: 81vw;
+      height: auto;
+      padding: 3px 5px;
+      margin-top: 25px;
+      margin-right: 4vw;
+      border-radius: 15px;
+      border-style: solid;
+      padding-left: 40px;
+      padding-bottom: 10px;
+    }
+    .container-lastest-blog {
+      margin-top: 20px;
+    }
 
-      html, body{
-        background-color: rgba(255, 255, 255);
-        padding: 0;
-        margin: 0;
-        font-size: "Segoe UI";
-      }
-
-      #main_title{
-        margin: auto;
-        padding: 10px;
-        text-align: center;
-        font-size: 45px;
-        font-family: sans-serif;
-        background-color: rgb(7, 7, 160);
-        /*color: rgb(7, 2, 2);*/
-        color: rgb(255, 255, 255);
-      }
-
-      #btn_save{
-        position: absolute;
-        width: 25%;
-        padding: 7px;
-        margin-top: 87.3%;
-        margin-left: 2.5%;
-        margin-bottom: 7%;
-      }
-      #subtitle{
-        text-align: center;
-        font-size: 35px;
-        font-family:sans-serif;
-        color: rgb(7, 2, 2);
-      }
-
-      #main_section{
-        font-size: 20px;
-        padding: 120px;
-        margin: 10px 200px 30px 200px;
-        text-align: center;
-      }
-
-      #main_section #container-form{
-        font-size: 22px;
-        background-color: rgb(226, 226, 226);
-        box-shadow: 4px 2px rgb(201, 197, 197);
-        padding: 25px;
-        border-radius: 5%;
-        text-align: left;
-      }
-
-      #main_section #container-form input{
-        padding: 5px;
-        margin-top: 10px;
-        height: 50%;
-        width: 40%;
-        border-radius: 4px;
-        border: 1px solid black;
-        box-sizing: border-box;
-      }
-
-      #main_section #container-form .image-file{
-        border: 0;
-      }
-
-      .main_section .container-form .text-area-content{
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid black;
-      }
-
-      .main_section .container-form .btn_save{
-        background-color: rgb(128, 126, 126);
-        margin: 20px 0 0 300px;
-        padding: 10px;
-        width: 20%;
-        font-size: 15px;
-        border-radius: 6px;
-        border: 0;
-        cursor: pointer; 
-      }
-
-      .main_section .container-form .btn_save:hover{
-        background-color: rgb(105, 101, 101);
-      }
-
-    </style>
+  </style>
   </head>
   <body>
     <h1 id="main_title">MY SPECTACULAR BLOG</h1>
@@ -112,44 +95,43 @@ $items = $viewModel->getPosts();
     <main id="main_section">
         <div id="container-form">
             <form method="POST">
-                <input type="text" name="title" placeholder="Titulo" />
+                <br><br>
+                <input type="text" id="title" name="title" placeholder="Titulo" />
                 <br>
-
-                <input type="email" name="email" placeholder="Email" />
+                <input type="email" id="email" name="email" placeholder="Email" />
                 <br>
-
-                <div class="field image">
+                <div class="field_image">
                     <label class="label" for="image"><span><?php /* @escapeNotVerified */ echo __('Image') ?></span></label>
                     <div class="control">
                       <input name="image" id="image" title="<?php /* @escapeNotVerified */ echo __('image') ?>"   type="file" />
                     </div>
                 </div>
                 <br><br>
-
-                <textarea class="text-area-content" name="content" cols="85" rows="45"></textarea>
+                <textarea class="text-area-content" id="textarea" name="content" cols="85" rows="45"></textarea>
                 <br>
-
                 <button id="btn_save">Guardar</button>
             </form>
         </div>
-    
         <div class= "container-lastest-blog">
-            <h1>My lastest post blog</h1> 
-            <h3>Aqui va el texto y mas adelante la fecha</h3>
+            <h2>My lastest post blog</h2> 
         </div>
+            <<?php foreach (array_reverse($items) as $bd): ?>
+            <div class="container_less_recent_blog">
+              <h4 class="">
+                <?= $bd['title'] ?>
+              </h4>
+              <div class="">
+                <div class=""><img src="<?= $bd['image'] ?>" alt="<?= $bd['image'] ?>"></div>
+                <div class="">
+                  <p class=""><?= $bd['content'] ?></p>
+                  <p class="">Fecha de publicación: <?= $bd['fecha'] ?></p>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
 
-        <div class= "container_less_recent_blog">
-            <h2>My less recent blog</h2> 
-            <h3>Aqui va el texto </h3>
-            <img src="">
-        </div>
-        <div class= "container_old_blog">
-            <h2>Today in old news</h2> 
-            <h3>Aqui va el texto y atras una imagen</h3>
-        </div>
     </main>
-
-        <!-- <script>
+         <script>
           function store(){
             let inputEmail= document.getElementById("email");
             let inputContent= document.getElementById("content");
@@ -162,7 +144,13 @@ $items = $viewModel->getPosts();
             let files = event.target.files; 
             let formData = new FormData();
             formData.append("image",files[0]);
-          }) -->
-       </script>
+          })
+          function dataCapture(){
+            let title = getElementById("title");
+            let email = getElementById("email");
+            let image = getElementById("image");
+            let textarea = getElementById("textarea");
+          }
+        </script>
   </body>
 </html>

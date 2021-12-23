@@ -100,9 +100,9 @@ class OmniBlogRepository implements \Omnipro\OmniBlog\Api\OmniBlogRepositoryInte
      */
     public function save($omniBlog)
     {   
-        $prueba1 = $this->validateEmail($omniBlog);
-        $prueba2 = sizeof($omniBlog->getData());
-        if (!$prueba1 && $prueba2) {
+        $validate1 = $this->validateEmail($omniBlog);
+        $validate2 = sizeof($omniBlog->getData());
+        if (!$validate1 && $validate2) {
             throw new CouldNotSaveException(__("The Email doesn't exists or It's not an administrator role"));
         }
 
