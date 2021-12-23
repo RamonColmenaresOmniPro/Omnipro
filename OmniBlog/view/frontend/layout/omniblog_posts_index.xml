@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Omnipro_OmniBlog::css/Styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="Omnipro_OmniBlog_Posts" template="Omnipro_OmniBlog::posts.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Omnipro\OmniBlog\ViewModel\OmniBlogViewModel</argument>
+                </arguments>
+            </block>
+            <referenceContainer name="header.container" remove="true" />
+            <referenceContainer name="footer" remove="true" /> 
+            <referenceBlock name="navigation.sections" remove="true" />
+        </referenceContainer>
+    </body>
+</page>

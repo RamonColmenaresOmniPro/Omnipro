@@ -1,0 +1,163 @@
+<?php
+/** @var \Magento\Framework\View\Element $block */
+$viewModel = $block->getViewModel();
+$items = $viewModel->getPosts();
+?>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="css/Styles.css">
+    <style>
+    body{
+      background-color: rgb(255, 136, 0);
+    }
+    main{
+      align-items: center;
+    }
+    h1 {
+      text-align: center;
+      text-shadow: 2px 2px rgb(255, 136, 0);
+      font-family: Arial, Helvetica, sans-serif;
+      border-radius: 15px;
+      background-color: #ffff;
+    }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      border-radius: 15px;
+      background-color: #ffff;
+      padding: 10px;
+      width: auto;
+    }
+    #container-form {
+      background-color: #ffff;
+      width: 70vw;
+      margin: auto;
+      height: 700px;
+      border-radius: 15px;
+      border-style: solid;
+      padding: 40px;
+    }
+    input[type=text] {
+      border: 1px solid black;
+      border-radius: 4px;
+      width: 40%;
+      padding: 3px 5px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .text-area-content {
+      border: 1px solid black;
+      border-radius: 8px;
+      width: 100%;
+      height: 57.1vh;
+      font-size: 15px;
+      border-style: solid;
+      border-color: black;
+    }
+    input[type=email] {
+      border: 1px solid black;
+      border-radius: 4px;
+      width: 50%;
+      padding-top: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    #btn_save {
+      cursor: pointer;
+      border: solid;
+      border-radius: 15px;
+      height: 40px;
+      width: 100px;
+      margin-top: 15px;
+    }
+    .container_less_recent_blog {
+      background-color: #ffff;
+      width: 81vw;
+      height: auto;
+      padding: 3px 5px;
+      margin-top: 25px;
+      margin-right: 4vw;
+      border-radius: 15px;
+      border-style: solid;
+      padding-left: 40px;
+      padding-bottom: 10px;
+    }
+    .container-lastest-blog {
+      margin-top: 20px;
+    }
+    #title, #email{
+      width: 400px;
+      padding: 5px;
+    }
+
+  </style>
+  </head>
+  <body>
+    <h1 id="main_title">MY SPECTACULAR BLOG</h1>
+    <h2 id="subtitle">New Blog Post</h2>
+    <main id="main_section">
+        <div id="container-form">
+            <form method="POST">
+                <br><br>
+                <input type="text" id="title" name="title" placeholder="Titulo" />
+                <br>
+                <input type="email" id="email" name="email" placeholder="Email" />
+                <br>
+                <div class="field_image">
+                    <label class="label" for="image"><span><?php /* @escapeNotVerified */ echo __('Image') ?></span></label>
+                    <div class="control">
+                      <input name="image" id="image" title="<?php /* @escapeNotVerified */ echo __('image') ?>"   type="file" />
+                    </div>
+                </div>
+                <br><br>
+                <textarea class="text-area-content" id="textarea" name="content" cols="85" rows="45"></textarea>
+                <br>
+                <button id="btn_save">Guardar</button>
+            </form>
+        </div>
+        <div class= "container-lastest-blog">
+            <h2>My lastest post blog</h2> 
+        </div>
+            <<?php foreach (array_reverse($items) as $bd): ?>
+            <div class="container_less_recent_blog">
+              <h4 class="">
+                <?= $bd['title'] ?>
+              </h4>
+              <div class="">
+                <div class=""><img src="<?= $bd['image'] ?>" alt="<?= $bd['image'] ?>"></div>
+                <div class="">
+                  <p class=""><?= $bd['content'] ?></p>
+                  <p class="">Fecha de publicación: <?= $bd['fecha'] ?></p>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+
+    </main>
+         <script>
+          function store(){
+            let inputEmail= document.getElementById("email");
+            let inputContent= document.getElementById("content");
+            let inputTitle= document.getElementById("title");
+            localStorage.setItem("email",inputEmail.value);
+            localStorage.setItem("content",inputContent.value);
+            localStorage.setItem("tittle",inputTitle.value);
+          }
+          document.getElementById("image").addEventListener("change", event => {
+            let files = event.target.files; 
+            let formData = new FormData();
+            formData.append("image",files[0]);
+          })
+          function dataCapture(){
+            let title = getElementById("title");
+            let email = getElementById("email");
+            let image = getElementById("image");
+            let textarea = getElementById("textarea");
+          }
+        </script>
+  </body>
+</html>
