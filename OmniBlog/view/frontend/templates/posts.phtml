@@ -12,55 +12,157 @@ $items = $viewModel->getPosts();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="stylesheet" href="../css/Styles.css">
+    <link rel="stylesheet" href="css/Styles.css">
+    <style>
+      /* * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      }  */
+
+      html, body{
+        background-color: rgba(255, 255, 255);
+        padding: 0;
+        margin: 0;
+        font-size: "Segoe UI";
+      }
+
+      #main_title{
+        margin: auto;
+        padding: 10px;
+        text-align: center;
+        font-size: 45px;
+        font-family: sans-serif;
+        background-color: rgb(7, 7, 160);
+        /*color: rgb(7, 2, 2);*/
+        color: rgb(255, 255, 255);
+      }
+
+      #btn_save{
+        position: absolute;
+        width: 25%;
+        padding: 7px;
+        margin-top: 87.3%;
+        margin-left: 2.5%;
+        margin-bottom: 7%;
+      }
+      #subtitle{
+        text-align: center;
+        font-size: 35px;
+        font-family:sans-serif;
+        color: rgb(7, 2, 2);
+      }
+
+      #main_section{
+        font-size: 20px;
+        padding: 120px;
+        margin: 10px 200px 30px 200px;
+        text-align: center;
+      }
+
+      #main_section #container-form{
+        font-size: 22px;
+        background-color: rgb(226, 226, 226);
+        box-shadow: 4px 2px rgb(201, 197, 197);
+        padding: 25px;
+        border-radius: 5%;
+        text-align: left;
+      }
+
+      #main_section #container-form input{
+        padding: 5px;
+        margin-top: 10px;
+        height: 50%;
+        width: 40%;
+        border-radius: 4px;
+        border: 1px solid black;
+        box-sizing: border-box;
+      }
+
+      #main_section #container-form .image-file{
+        border: 0;
+      }
+
+      .main_section .container-form .text-area-content{
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid black;
+      }
+
+      .main_section .container-form .btn_save{
+        background-color: rgb(128, 126, 126);
+        margin: 20px 0 0 300px;
+        padding: 10px;
+        width: 20%;
+        font-size: 15px;
+        border-radius: 6px;
+        border: 0;
+        cursor: pointer; 
+      }
+
+      .main_section .container-form .btn_save:hover{
+        background-color: rgb(105, 101, 101);
+      }
+
+    </style>
   </head>
   <body>
-    <h1 class="main_title">MY SPECTACULAR BLOG</h1>
-    <h2 class="subtitle">New Blog Post</h2>
-    <main class="main_section">
-        <div class="container-form" id="container">
+    <h1 id="main_title">MY SPECTACULAR BLOG</h1>
+    <h2 id="subtitle">New Blog Post</h2>
+    <main id="main_section">
+        <div id="container-form">
             <form method="POST">
                 <input type="text" name="title" placeholder="Titulo" />
-                <br><br>
-                <textarea name="content" cols="30" rows="15"></textarea>
                 <br>
+
                 <input type="email" name="email" placeholder="Email" />
                 <br>
-                <input type="file" name="image" placeholder="Imagen" />
+
+                <div class="field image">
+                    <label class="label" for="image"><span><?php /* @escapeNotVerified */ echo __('Image') ?></span></label>
+                    <div class="control">
+                      <input name="image" id="image" title="<?php /* @escapeNotVerified */ echo __('image') ?>"   type="file" />
+                    </div>
+                </div>
                 <br><br>
-                <button class="btn_save">Guardar</button>
+
+                <textarea class="text-area-content" name="content" cols="85" rows="45"></textarea>
+                <br>
+
+                <button id="btn_save">Guardar</button>
             </form>
         </div>
-          <div class= "container_b">
+    
+        <div class= "container-lastest-blog">
             <h1>My lastest post blog</h1> 
             <h3>Aqui va el texto y mas adelante la fecha</h3>
-          </div>
-          <div class= "container_c">
-              <h2>My less recent blog</h2> 
-              <h3>Aqui va el texto </h3>
-              <img src="">
-            </div>
-            <div class= "container_d">
-                <h2>Today in old news</h2> 
-                <h3>Aqui va el texto y atras una imagen</h3>
-            </div>
+        </div>
+
+        <div class= "container_less_recent_blog">
+            <h2>My less recent blog</h2> 
+            <h3>Aqui va el texto </h3>
+            <img src="">
+        </div>
+        <div class= "container_old_blog">
+            <h2>Today in old news</h2> 
+            <h3>Aqui va el texto y atras una imagen</h3>
+        </div>
     </main>
-    <script>
-       function store(){
-         let inputEmail= document.getElementById("email");
-         let inputContent= document.getElementById("content");
-         let inputTitle= document.getElementById("title");
-         let inputImage= document.getElementById("image")
-         let files = event.target.files; 
-         let formData = new FormData();
-         formData.append("image",files[0]);
-         fetch('https://app.bootcamp.test/rest/V1/omniBlog', {
-           method:'POST'
-         }).then(response =>response.json())
-         .catch(error => {
-           console.log(error);
-         })
-       }
+
+        <!-- <script>
+          function store(){
+            let inputEmail= document.getElementById("email");
+            let inputContent= document.getElementById("content");
+            let inputTitle= document.getElementById("title");
+            localStorage.setItem("email",inputEmail.value);
+            localStorage.setItem("content",inputContent.value);
+            localStorage.setItem("tittle",inputTitle.value);
+          }
+          document.getElementById("image").addEventListener("change", event => {
+            let files = event.target.files; 
+            let formData = new FormData();
+            formData.append("image",files[0]);
+          }) -->
        </script>
   </body>
 </html>

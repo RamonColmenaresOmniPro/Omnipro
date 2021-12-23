@@ -1,6 +1,8 @@
 <?php
 namespace Omnipro\OmniBlog\Controller\Posts;
 
+use  Magento\Framework\App\Filesystem\DirectoryList;
+
 class Index extends \Magento\Framework\App\Action\Action
 {
     /**
@@ -26,7 +28,15 @@ class Index extends \Magento\Framework\App\Action\Action
     /**
      * @param \Magento\Framework\App\Action\Context $context
      */
+
+    protected $uploaderFactory;
+    protected $adapterFactory;
+    protected $filesystem;
+
     public function __construct(
+        \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory,
+        \Magento\Framework\Image\AdapterFactory $adapterFactory,
+        \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
@@ -34,6 +44,9 @@ class Index extends \Magento\Framework\App\Action\Action
         \Omnipro\OmniBlog\Api\OmniBlogRepositoryInterface $omniBlogRepository
     )
     {
+        $this->uploaderFactory = $uploaderFactory;
+        $this->adapterFactory = $adapterFactory;
+        $this->filesystem = $filesystem;
         $this->_pageFactory = $pageFactory;
         $this->jsonFactory = $jsonFactory;
         $this->omniBlogFactory = $omniBlogFactory;
@@ -47,6 +60,31 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
+        try{
+            $uploaderFactory = $this->uploaderFactory->create(['fileId' => 'image']);
+            $uploaderFactory->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+            $imageAdapter = $this->adapterFactory->create();
+            /* start of validated image */
+            $uploaderFactory->addValidateCallback('custom_image_upload',
+                $imageAdapter,'validateUploadFile');
+            $uploaderFactory->setAllowRenameFiles(true);
+            $uploaderFactory->setFilesDispersion(true);
+            $mediaDirectory = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
+            $destinationPath = $mediaDirectory->getAbsolutePath('custom_image');
+            $result = $uploaderFactory->save($destinationPath);
+            if (!$result) {
+                throw new LocalizedException(
+                    __('File cannot be saved to path: $1', $destinationPath)
+                );
+            }
+            /* you need yo save image 
+                 $result['file'] at datbaseQQ 
+            */
+            $imagepath = $result['file'];
+            //
+        } catch (\Exception $e) {
+        }
+
         $json = $this->jsonFactory->create();
 
         $omniblog = $this->omniBlogFactory->create();
